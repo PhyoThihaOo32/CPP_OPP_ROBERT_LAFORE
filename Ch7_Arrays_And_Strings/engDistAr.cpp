@@ -67,7 +67,6 @@ int main()
                     break;
                 }
             }
-
             cout << "Press 0 to stop or any other key to continue: ";
             cin >> option;
         }

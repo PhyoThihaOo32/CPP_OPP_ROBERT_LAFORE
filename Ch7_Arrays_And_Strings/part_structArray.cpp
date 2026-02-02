@@ -14,7 +14,6 @@ Each `part` structure stores:
 The program initializes an array of car parts, then displays
 their details in a formatted manner.
 
-Author: Phyo
 */
 
 #include <iostream>

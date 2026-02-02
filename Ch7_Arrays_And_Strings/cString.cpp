@@ -26,7 +26,7 @@ int main()
     const int SIZE = 50; // Maximum input size
 
     char name[SIZE];
-    char quote[] = "The only limit to our realization of tomorrow is our doubts of today.";
+    char quote[] = "Why do programmers prefer dark mode? Because light attracts bugs!";
     char wish[SIZE];
     char song[SIZE];
 
