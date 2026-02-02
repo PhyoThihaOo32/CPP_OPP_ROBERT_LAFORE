@@ -24,9 +24,9 @@ int main()
     // PART 1 — Basic concatenation and copying
     // ------------------------------------------------------------
     const int SIZE = 50;
-    char str1[SIZE] = "Pepito mucho";  // Destination string
-    char str2[] = " mean Little Joe."; // Source string
-    char str3[SIZE];                   // Copy destination
+    char str1[SIZE] = "Pepito mucho";   // Destination string
+    char str2[] = " means Little Joe."; // Source string
+    char str3[SIZE];                    // Copy destination
 
     // strlen(): returns number of visible characters (no '\0')
     int length = strlen(str1);
@@ -64,7 +64,7 @@ int main()
         Appends up to n characters from src to dest.
         Ensures dest is properly null-terminated.
     */
-    int maxAvaChar = sizeof(mystr1) - (strlen(mystr1) + 1); // Leave space for '\0'
+    int maxAvaChar = sizeof(mystr1) - (strlen(mystr1) + 1); // 1 is to leave space for '\0'
     strncat(mystr1, mystr2, maxAvaChar);
     cout << "After strncat(): " << mystr1 << endl;
 
