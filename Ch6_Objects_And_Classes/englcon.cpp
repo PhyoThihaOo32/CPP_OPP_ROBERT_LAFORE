@@ -1,3 +1,20 @@
+/*
+Program: Average of Distances
+------------------------------------------------------------
+Description:
+This program defines a class `Distance` that represents a length
+in feet and inches. It demonstrates:
+- Function overloading
+- Object addition using member functions
+- Aggregation of multiple Distance objects
+- Calculating and displaying average distance
+
+The program prompts the user to enter multiple distances,
+sums them up, and computes their average.
+
+Author: Phyo T. Oo
+*/
+
 #include <iostream>
 using namespace std;
 
@@ -8,13 +25,11 @@ private:
     float inches;
 
 public:
-    // Default constructor
+    // Constructors
     Distance() : feet(0), inches(0.0) {}
-
-    // Parameterized constructor
     Distance(int ft, float in) : feet(ft), inches(in) {}
 
-    // Input function
+    // Input and display functions
     void getDist()
     {
         cout << "Enter feet: ";
@@ -23,18 +38,23 @@ public:
         cin >> inches;
     }
 
-    // Output function
     void showDist() const
     {
         cout << feet << " ft " << inches << " in" << endl;
     }
 
-    // Function overloading
-    void addDist(Distance d1, Distance d2); // version 1 (void)
-    Distance addDist(Distance d) const;     // version 2 (returns Distance)
+    // Overloaded functions for adding distances
+    void addDist(Distance d1, Distance d2); // version 1: stores sum of two objects
+    void addDist(Distance d1);              // version 2: adds d1 to current object
+    Distance addDist(Distance d) const;     // version 3: returns new object (non-mutating)
+
+    // Computes average by dividing total distance by number
+    void avgDist(int num);
 };
 
-// version 1: adds d1 and d2 and stores in current object
+//------------------------------------------------------------
+// version 1: adds d1 + d2 → stores result in *this
+//------------------------------------------------------------
 void Distance::addDist(Distance d1, Distance d2)
 {
     inches = d1.inches + d2.inches;
@@ -47,7 +67,23 @@ void Distance::addDist(Distance d1, Distance d2)
     }
 }
 
-// version 2: adds calling object + d and returns new Distance
+//------------------------------------------------------------
+// version 2: adds another Distance to current object
+//------------------------------------------------------------
+void Distance::addDist(Distance d1)
+{
+    inches += d1.inches;
+    feet += d1.feet;
+    if (inches >= 12)
+    {
+        inches -= 12;
+        feet++;
+    }
+}
+
+//------------------------------------------------------------
+// version 3: returns a new Distance = (this + d)
+//------------------------------------------------------------
 Distance Distance::addDist(Distance d) const
 {
     Distance temp;
@@ -63,26 +99,53 @@ Distance Distance::addDist(Distance d) const
     return temp;
 }
 
+//------------------------------------------------------------
+// Divides current Distance by given number to compute average
+//------------------------------------------------------------
+void Distance::avgDist(int num)
+{
+    float totalInches = feet * 12.0 + inches; // convert to inches
+    float avgInches = totalInches / num;
+
+    feet = static_cast<int>(avgInches / 12);
+    inches = fmod(avgInches, 12.0);
+}
+
+//------------------------------------------------------------
+// Main program
+//------------------------------------------------------------
 int main()
 {
-    Distance d1, d3;
-    Distance d2(11, 6.25);
+    const int SIZE = 3;
+    Distance dist[SIZE];
+    Distance total, average;
 
-    cout << "Enter first distance:\n";
-    d1.getDist();
+    cout << "Enter " << SIZE << " distances:\n";
+    for (int i = 0; i < SIZE; i++)
+    {
+        cout << "\nDistance " << i + 1 << ":\n";
+        dist[i].getDist();
+    }
 
-    // use version 1
-    d3.addDist(d1, d2);
+    cout << "\nEntered distances:\n";
+    for (int i = 0; i < SIZE; i++)
+    {
+        dist[i].showDist();
+    }
 
-    // use version 2 (returning object)
-    d1 = d2.addDist(d3);
+    // Add all distances together
+    for (int i = 0; i < SIZE; i++)
+    {
+        total.addDist(dist[i]);
+    }
 
-    cout << "\nd1 = ";
-    d1.showDist();
-    cout << "d2 = ";
-    d2.showDist();
-    cout << "d3 = ";
-    d3.showDist();
+    cout << "\nTotal distance: ";
+    total.showDist();
+
+    // Compute and display average
+    total.avgDist(SIZE);
+    cout << "Average distance: ";
+    total.showDist();
 
     return 0;
 }
