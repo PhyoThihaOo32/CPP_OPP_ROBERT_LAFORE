@@ -32,7 +32,7 @@ public:
     // Constructor with validation
     Time12(PmAm pmAm, int hr, int min) : isPm(pmAm)
     {
-        // ✅ Input validation ensures 1 ≤ hour ≤ 12, 0 ≤ min ≤ 59
+        // Input validation ensures 1 ≤ hour ≤ 12, 0 ≤ min ≤ 59
         hour = (hr >= 1 && hr <= 12) ? hr : 12;
         minute = (min >= 0 && min <= 59) ? min : 0;
     }

@@ -12,8 +12,8 @@ private:
 public:
     Distance() : feet(0), inches(0.0) {};
     Distance(int f, float i) : feet(f), inches(i) {};
-    // conversion constructor : meter to distance(feet/inch)
-    Distance(float meter)
+    // conversion constructor : float(meter) to distance(feet/inch)
+    explicit Distance(float meter)
     {
         float tfeet = meter * MTF;
         feet = static_cast<int>(tfeet); // Note: casting does not change the original value — it just creates a temporary converted copy.
@@ -81,7 +81,8 @@ Distance::operator float() const
     fracFeet += static_cast<float>(feet);
     return fracFeet / MTF;
 }
-
+// testing explicit keyword
+void fancyDistance(Distance);
 int main()
 {
 
@@ -108,7 +109,16 @@ int main()
 
     cout << meterD5 << endl;
 
+    cout << "Testing explicit: " << endl;
+    // fancyDistance(meterD5);
+
     return 0;
+}
+
+void fancyDistance(Distance d)
+{
+    cout << "Distance in feet and inches" << endl;
+    d.display();
 }
 
 /*
