@@ -11,7 +11,6 @@ It includes:
 Each function manually handles string manipulation without using <cstring> functions like strcpy() or strlen(),
 illustrating how C-strings work internally.
 
-Author: Phyo T. Oo
 */
 
 #include <iostream>

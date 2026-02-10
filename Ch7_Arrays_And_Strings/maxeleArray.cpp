@@ -11,8 +11,6 @@ Demonstrates:
 - Passing arrays to functions
 - Searching for maximum values
 - Using returned indices to access array elements
-
-Author: Phyo T. Oo
 */
 
 #include <iostream>
